@@ -136,7 +136,7 @@ resource "datadog_integration_aws" "sandbox" {
   account_id  = "${data.aws_caller_identity.current.account_id}"
   role_name   = "DatadogAWSIntegrationRole"
   cspm_resource_collection_enabled = true
-  host_tags = ["aws_account:${data.aws_caller_identity.current.account_id},event:aws-x-datadog"]
+  host_tags = ["aws_account:${data.aws_caller_identity.current.account_id}","event:aws-x-datadog"]
 }
 
 resource "datadog_integration_aws_tag_filter" "rds" {
