@@ -1,7 +1,5 @@
 resource "kubernetes_deployment" "frontend" {
-  depends_on = [
-    kubernetes_namespace.storedog
-  ]
+  depends_on = [kubernetes_namespace.storedog, datadog_rum_application.storedog]
   metadata {
     labels = {
       "app"                    = "ecommerce"
@@ -114,12 +112,12 @@ resource "kubernetes_deployment" "frontend" {
 
           env {
             name  = "DD_CLIENT_TOKEN"
-            value = var.DD_CLIENT_TOKEN
+            value = "${datadog_rum_application.storedog.client_token}"
           }
 
           env {
             name  = "DD_APPLICATION_ID"
-            value = var.DD_APPLICATION_ID
+            value = "${datadog_rum_application.storedog.id}"
           }
 
 
