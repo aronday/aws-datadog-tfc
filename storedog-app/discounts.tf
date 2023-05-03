@@ -5,8 +5,8 @@ resource "kubernetes_deployment" "discounts" {
 metadata {
     labels = {
       "app"                    = "ecommerce"
-      "service"                = "discounts"
       "tags.datadoghq.com/env" = "development"
+      "tags.datadoghq.com/service" = "discounts"
     }
     name      = "discounts"
     namespace = kubernetes_namespace.storedog.id
@@ -16,8 +16,9 @@ spec {
 
     selector {
       match_labels = {
-        app     = "ecommerce"
-        service = "discounts"
+        "app"     = "ecommerce"
+        "tags.datadoghq.com/env" = "development"
+        "tags.datadoghq.com/service" = "discounts"
       }
     }
     strategy {
@@ -32,8 +33,8 @@ spec {
       metadata {
         labels = {
           "app"                    = "ecommerce"
-          "service"                = "discounts"
           "tags.datadoghq.com/env" = "development"
+          "tags.datadoghq.com/service" = "discounts"
         }
       }
 
@@ -132,14 +133,16 @@ resource "kubernetes_service" "discounts" {
     name      = "discounts"
     namespace = kubernetes_namespace.storedog.id
     labels = {
-      app     = "ecommerce"
-      service = "discounts"
+      "app"     = "ecommerce"
+      "tags.datadoghq.com/env" = "development"
+      "tags.datadoghq.com/service" = "discounts"
     }
   }
   spec {
     selector = {
-      app = "ecommerce"
-      service = "discounts"
+      "app" = "ecommerce"
+      "tags.datadoghq.com/env" = "development"
+      "tags.datadoghq.com/service" = "discounts"
     }
     port {
       port        = 5001

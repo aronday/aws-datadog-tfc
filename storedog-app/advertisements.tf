@@ -6,8 +6,8 @@ resource "kubernetes_deployment" "advertisements" {
 metadata {
     labels = {
       "app"                    = "ecommerce"
-      "service"                = "advertisements"
       "tags.datadoghq.com/env" = "development"
+      "tags.datadoghq.com/service" = "advertisements"
     }
     name      = "advertisements"
     namespace = kubernetes_namespace.storedog.id
@@ -17,8 +17,9 @@ spec {
 
     selector {
       match_labels = {
-        app     = "ecommerce"
-        service = "advertisements"
+        "app"     = "ecommerce"
+        "tags.datadoghq.com/env" = "development"
+        "tags.datadoghq.com/service" = "advertisements"
       }
     }
     strategy {
@@ -33,8 +34,8 @@ spec {
       metadata {
         labels = {
           "app"                    = "ecommerce"
-          "service"                = "advertisements"
           "tags.datadoghq.com/env" = "development"
+          "tags.datadoghq.com/service" = "advertisements"
         }
       }
 
@@ -133,14 +134,16 @@ resource "kubernetes_service" "advertisements" {
     name      = "advertisements"
     namespace = kubernetes_namespace.storedog.id
     labels = {
-      app     = "ecommerce"
-      service = "advertisements"
+      "app"     = "ecommerce"
+      "tags.datadoghq.com/env" = "development"
+      "tags.datadoghq.com/service" = "advertisements"
     }
   }
   spec {
     selector = {
       app = "ecommerce"
-      service = "advertisements"
+      "tags.datadoghq.com/env" = "development"
+      "tags.datadoghq.com/service" = "advertisements"
     }
     port {
       port        = 5002

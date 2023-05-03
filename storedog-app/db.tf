@@ -77,7 +77,6 @@ resource "kubernetes_deployment" "db" {
     labels = {
       "app"                    = "ecommerce"
       "service"                = "db"
-      "tags.datadoghq.com/env" = "development"
     }
     name      = "db"
     namespace = kubernetes_namespace.storedog.id
@@ -104,7 +103,6 @@ resource "kubernetes_deployment" "db" {
         labels = {
           "app"                    = "ecommerce"
           "service"                = "db"
-          "tags.datadoghq.com/env" = "development"
         }
       }
 

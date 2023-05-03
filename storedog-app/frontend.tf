@@ -3,10 +3,10 @@ resource "kubernetes_deployment" "frontend" {
   metadata {
     labels = {
       "app"                    = "ecommerce"
-      "service"                = "store-frontend"
       "tags.datadoghq.com/env" = "development"
+      "tags.datadoghq.com/service" = "storefront"
     }
-    name      = "store-frontend"
+    name      = "frontend"
     namespace = kubernetes_namespace.storedog.id
   }
   spec {
@@ -14,8 +14,9 @@ resource "kubernetes_deployment" "frontend" {
 
     selector {
       match_labels = {
-        app     = "ecommerce"
-        service = "store-frontend"
+        "app"     = "ecommerce"
+        "tags.datadoghq.com/env" = "development"
+        "tags.datadoghq.com/service" = "storefront"
       }
     }
     strategy {
@@ -30,8 +31,8 @@ resource "kubernetes_deployment" "frontend" {
       metadata {
         labels = {
           "app"                    = "ecommerce"
-          "service"                = "store-frontend"
           "tags.datadoghq.com/env" = "development"
+          "tags.datadoghq.com/service" = "storefront"
         }
       }
 
@@ -148,17 +149,19 @@ resource "kubernetes_service" "frontend" {
     kubernetes_namespace.storedog
   ]
   metadata {
-    name      = "store-frontend"
+    name      = "frontend"
     namespace = kubernetes_namespace.storedog.id
     labels = {
-      app     = "ecommerce"
-      service = "store-frontend"
+      "app"     = "ecommerce"
+      "tags.datadoghq.com/env" = "development"
+      "tags.datadoghq.com/service" = "storefront"
     }
   }
   spec {
     selector = {
-      app = "ecommerce"
-      service = "store-frontend"
+      "app" = "ecommerce"
+      "tags.datadoghq.com/env" = "development"
+      "tags.datadoghq.com/service" = "storefront"
     }
     port {
       port        = 80
