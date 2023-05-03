@@ -114,7 +114,7 @@ spec {
 
           image             = "public.ecr.aws/x2b9z2t7/ddtraining/advertisements:latest"
           image_pull_policy = "Always"
-          name              = "discounts"
+          name              = "advertisements"
           port {
             container_port = 5002
             protocol       = "TCP"
