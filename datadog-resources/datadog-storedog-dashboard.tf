@@ -1,6 +1,7 @@
 resource "datadog_dashboard" "storedog_dashboard" {
   layout_type  = "ordered"
   reflow_type  = "fixed"
+  url = "tgy-akk-nin/storedog-dashboard"
   title        = "Storedog Dashboard"
 
     widget {
