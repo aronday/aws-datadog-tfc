@@ -29,6 +29,9 @@ resource "kubernetes_deployment" "frontend" {
 
     template {
       metadata {
+        annotations = {
+          "ad.datadoghq.com/storefront-fixed.logs" = "[{\"source\": \"ruby\", \"service\": \"storefront\"}]"
+    }
         labels = {
           "app"                    = "ecommerce"
           "tags.datadoghq.com/env" = "development"

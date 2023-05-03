@@ -32,6 +32,9 @@ spec {
 
     template {
       metadata {
+        annotations = {
+          "ad.datadoghq.com/advertisements.logs" = "[{\"source\": \"python\", \"service\": \"advertisements\"}]"
+    }
         labels = {
           "app"                    = "ecommerce"
           "tags.datadoghq.com/env" = "development"

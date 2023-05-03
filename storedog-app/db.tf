@@ -100,6 +100,9 @@ resource "kubernetes_deployment" "db" {
 
     template {
       metadata {
+        annotations = {
+          "ad.datadoghq.com/postgres.logs" = "[{\"source\": \"postgresql\", \"service\": \"postgres\"}]"
+    }
         labels = {
           "app"                    = "ecommerce"
           "service"                = "db"
